@@ -108,6 +108,77 @@ Example `crontab` file:
 
 For more details, refer to the [Graphile Worker Crontab Documentation](https://worker.graphile.org/usage/crontab/).
 
+## API Routes
+
+The application exposes the following routes under the `/worker` endpoint:
+
+### POST `/worker/job/single`
+- **Description**: Adds a single job to the queue.
+- **Request Body**: None.
+- **Response**: Returns the job details after it is added to the queue.
+
+### POST `/worker/job/batch`
+- **Description**: Adds a batch of jobs with the same identifier and different payloads to the queue.
+- **Request Body**: None.
+- **Response**: Returns the details of the batch jobs added to the queue.
+
+### POST `/worker/job/bulk`
+- **Description**: Adds multiple jobs with different identifiers and payloads to the queue.
+- **Request Body**: None.
+- **Response**: Returns the details of the bulk jobs added to the queue.
+
+## Tasks
+
+The application defines the following tasks in the `tasks` folder:
+
+### `hello.task.ts`
+- **Task Name**: `hello`
+- **Description**: Handles jobs with the `hello` identifier. It processes the payload and logs the details. If the payload is an array, it processes each item in the array.
+- **Code**:
+```typescript
+import { Injectable } from "@nestjs/common";
+import type { Helpers } from "graphile-worker";
+import { Task, TaskHandler } from "nestjs-graphile-worker";
+
+@Injectable()
+@Task("hello")
+export class HelloTask {
+
+	@TaskHandler()
+	handler(payload: any | any[], _helpers: Helpers): void {
+		if (Array.isArray(payload)) {
+			_helpers.logger.debug(`handle array payload ${JSON.stringify(payload)}`);
+		} else {
+			_helpers.logger.debug(`handle ${JSON.stringify(payload)}`);
+		}
+
+		if (Math.random() < 0.5) {
+			throw new Error("Random error occurred");
+		}
+	}
+}
+```
+
+### `recurrent.task.ts`
+- **Task Name**: `recurrent-task`
+- **Description**: Handles recurrent tasks with the `recurrent-task` identifier. It logs the payload details.
+- **Code**:
+```typescript
+import { Injectable } from "@nestjs/common";
+import type { Helpers } from "graphile-worker";
+import { Task, TaskHandler } from "nestjs-graphile-worker";
+
+@Injectable()
+@Task("recurrent-task")
+export class RecurrentTask {
+
+	@TaskHandler()
+	handler(payload: any, _helpers: Helpers): void { 
+		_helpers.logger.debug(`handle recurent task ${JSON.stringify(payload)}`);
+	}
+}
+```
+
 ## Resources
 
 - [NestJS Documentation](https://docs.nestjs.com)
