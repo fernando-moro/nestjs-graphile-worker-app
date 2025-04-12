@@ -1,109 +1,117 @@
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="https://worker.graphile.org/" target="blank"><img src="https://worker.graphile.org/img/logo.optimized.svg" width="120" alt="Graphile Worker Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1 align="center">NestJS + Graphile Worker App</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework integrated with <a href="https://worker.graphile.org/" target="_blank">Graphile Worker</a> to create a robust and scalable queue processing system.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<p align="center">
+  <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+  <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+  <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+  <a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+  <a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## Overview
+
+This project demonstrates how to use [NestJS](https://nestjs.com) with [Graphile Worker](https://worker.graphile.org/) to build a queue-based processing system. It leverages the scalability and modularity of NestJS alongside the powerful job queueing capabilities of Graphile Worker.
+
+## Features
+
+- **NestJS Framework**: A progressive Node.js framework for building efficient server-side applications.
+- **Graphile Worker Integration**: A lightweight and high-performance job queue for PostgreSQL.
+- **Queue Management**: Easily define and process tasks in a queue.
+- **Scalability**: Designed to handle high-throughput workloads.
+- **Developer Tools**: Includes linting, formatting, and testing utilities.
+
+## Prerequisites
+
+Before setting up the project, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org) (v16 or higher recommended)
+- [PostgreSQL](https://www.postgresql.org) (v12 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+## Installation
+
+Clone the repository and install dependencies:
 
 ```bash
+$ git clone https://github.com/your-repo/nestjs-graphile-worker-app.git
+$ cd nestjs-graphile-worker-app
 $ npm install
 ```
 
-## Compile and run the project
+## Configuration
+
+1. Create a `.env` file in the root directory and configure your PostgreSQL connection:
+
+```env
+POSTGRESQL_URI=postgres://username:password@localhost:5432/your_database
+```
+
+2. Run database migrations (if applicable).
+
+## Running the Application
+
+Start the application in different modes:
 
 ```bash
-# development
+# Development mode
 $ npm run start
 
-# runs the app and open it in the browser
-$ npm run start -- -b swc
-
-# watch mode
+# Watch mode (auto-restart on file changes)
 $ npm run start:dev
 
-# production mode
+# Production mode
 $ npm run start:prod
 ```
 
+## Using the Queue
+
+1. Define a task in the `tasks` folder.
+2. Add jobs to the queue using the `Graphile Worker` API.
+3. Process jobs automatically with the worker.
+
+Example of adding a job:
+
+```typescript
+import { addJob } from 'graphile-worker';
+
+await addJob('task_name', { key: 'value' });
+```
+
+## Linting and Formatting
+
+Ensure code quality with the following commands:
+
 ```bash
-# Lint and autofix with eslint
+# Lint and autofix
 $ npm run lint
 
-# Format with prettier
+# Format code
 $ npm run format
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
 ## Resources
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+- [NestJS Documentation](https://docs.nestjs.com)
+- [Graphile Worker Documentation](https://worker.graphile.org/)
+- [NestJS Discord Community](https://discord.gg/G7Qnnhy)
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+This project is open-source and licensed under the [MIT License](https://opensource.org/licenses/MIT). Contributions are welcome!
 
-## Stay in touch
+## Author
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **Fernando** - [GitHub Profile](https://github.com/your-profile)
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
