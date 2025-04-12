@@ -29,7 +29,6 @@ This project demonstrates how to use [NestJS](https://nestjs.com) with [Graphile
 - **Graphile Worker Integration**: A lightweight and high-performance job queue for PostgreSQL.
 - **Queue Management**: Easily define and process tasks in a queue.
 - **Scalability**: Designed to handle high-throughput workloads.
-- **Developer Tools**: Includes linting, formatting, and testing utilities.
 
 ## Prerequisites
 
