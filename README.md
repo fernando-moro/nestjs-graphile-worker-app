@@ -110,8 +110,10 @@ $ npm run format
 
 This project is open-source and licensed under the [MIT License](https://opensource.org/licenses/MIT). Contributions are welcome!
 
+For more details, see the [LICENSE](./LICENSE) file.
+
 ## Author
 
-- **Fernando** - [GitHub Profile](https://github.com/your-profile)
+- **Fernando Moro** - [GitHub Profile](https://github.com/fernando-moro)
 
 ---
