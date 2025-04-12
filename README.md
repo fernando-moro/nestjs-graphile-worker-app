@@ -115,6 +115,10 @@ For more details, refer to the [Graphile Worker Crontab Documentation](https://w
 - [Graphile Worker Documentation](https://worker.graphile.org/)
 - [NestJS Discord Community](https://discord.gg/G7Qnnhy)
 
+## Acknowledgments
+
+This project uses the [nestjs-graphile-worker](https://github.com/madeindjs/nestjs-graphile-worker) library for seamless integration with Graphile Worker.
+
 ## Support
 
 This project is open-source and licensed under the [MIT License](https://opensource.org/licenses/MIT). Contributions are welcome!
