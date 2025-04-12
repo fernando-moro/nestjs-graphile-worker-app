@@ -44,7 +44,7 @@ Before setting up the project, ensure you have the following installed:
 Clone the repository and install dependencies:
 
 ```bash
-$ git clone https://github.com/your-repo/nestjs-graphile-worker-app.git
+$ git clone https://github.com/fernando-moro/nestjs-graphile-worker-app.git
 $ cd nestjs-graphile-worker-app
 $ npm install
 ```
@@ -57,7 +57,7 @@ $ npm install
 POSTGRESQL_URI=postgres://username:password@localhost:5432/your_database
 ```
 
-2. Run database migrations (if applicable).
+2. Database migrations will run automatically when the application starts.
 
 ## Running the Application
 
@@ -88,17 +88,26 @@ import { addJob } from 'graphile-worker';
 await addJob('task_name', { key: 'value' });
 ```
 
-## Linting and Formatting
+## Recurrent Tasks
 
-Ensure code quality with the following commands:
+Graphile Worker supports scheduling recurrent tasks using a `crontab` file. To configure recurrent tasks:
 
-```bash
-# Lint and autofix
-$ npm run lint
+1. Create a `crontab` file in the root directory.
+2. Define tasks in the file using the cron syntax.
 
-# Format code
-$ npm run format
+Example `crontab` file:
+
+```crontab
+# Run the "cleanup" task every day at midnight
+0 0 * * * cleanup
+
+# Run the "send-emails" task every hour
+0 * * * * send-emails
 ```
+
+3. Ensure the `crontab` file is loaded by the worker when the application starts.
+
+For more details, refer to the [Graphile Worker Crontab Documentation](https://worker.graphile.org/usage/crontab/).
 
 ## Resources
 
